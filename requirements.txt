@@ -1,9 +1,7 @@
 streamlit
+audio-recorder-streamlit
 langchain
 langchain-community
 ollama
-pathlib
-audio-recorder-streamlit
 torch
 transformers
-piper-tts
