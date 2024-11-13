@@ -1,4 +1,5 @@
 import os
+import platform
 import streamlit as st
 import subprocess
 from langchain.memory.buffer import ConversationBufferMemory
@@ -12,6 +13,7 @@ from langchain.prompts import (
         MessagesPlaceholder,
         SystemMessagePromptTemplate,
     )
+from gtts import gTTS
 
 
 class ChatBot:
@@ -67,12 +69,13 @@ def transcribe_audio(pipeline, audio_bytes):
 
 
 def text_to_speech(text):
-    # use piper to convert text to speech and store 
-    with open(os.devnull, 'w') as devnull:
-        subprocess.call(f'echo "{text}" | piper --model en_US-amy-medium --output_file output.wav', 
-                        shell=True, 
-                        stdout=devnull, 
-                        stderr=subprocess.STDOUT)
+    # Save the converted audio in a mp3 file named
+    language = 'en'
+    tts = gTTS(text=text, lang=language, slow=False)
+    tts.save("output.mp3")
     
     # play the stored audio
-    os.system("aplay output.wav")
+    if platform.platform().startswith("mac"):
+        os.system("afplay output.mp3")
+    else:
+        os.system("aplay output.mp3")

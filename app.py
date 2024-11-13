@@ -3,7 +3,6 @@ import time
 from audio_recorder_streamlit import audio_recorder
 from transformers import pipeline
 import torch
-
 from ai import ChatBot, text_to_speech, transcribe_audio
 
 
@@ -47,7 +46,7 @@ with footer_container:
 if st.session_state.audio_bytes:
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     pipeline = pipeline("automatic-speech-recognition", 
-                        "openai/whisper-large-v3-turbo", 
+                        "openai/whisper-large-v3-turbo",
                         torch_dtype=torch.float16, 
                         device=device)
     transcript = transcribe_audio(pipeline, st.session_state.audio_bytes)
@@ -66,12 +65,15 @@ if st.session_state.audio_bytes:
             end_time = time.time()
 
             # Calculate response time
-            response_time = f"Response time: {end_time - start_time:.2f} seconds"
-
+            # response_time = f"Response time: {end_time - start_time:.2f} seconds"
+            
             # Display and play assistant response via TTS
             st.markdown(response)
             text_to_speech(response)
-            st.markdown(f"_{response_time}_")
+            # st.markdown(f"_{response_time}_")
 
         # Save assistant response
-        st.session_state.messages.append({"role": "assistant", "content": response, "response_time": response_time})
+        st.session_state.messages.append({"role": "assistant", 
+                                        "content": response, 
+                                        # "response_time": response_time
+                                        })
