@@ -1,6 +1,10 @@
 # Locxa - Your Local Alexa 
 ![Capture](assets/locxa.jpg)
-
+<div align='center'>
+     <p>
+        <a href='https://youtu.be/8vPPwL9zlFA?si=MqQW5_INfRx-vuWi'><img src='https://badges.aleen42.com/src/youtube.svg'></a>
+    </p>
+</div>
 A simple Alexa style AI assistant that can be readily downloaded and setup on your Laptop!
 
 ## Overview of the App 
